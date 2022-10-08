@@ -21,24 +21,24 @@ enum class REGS {
 class Registers {
 
     // AF, BC, DE, HL
-    var registers = UShortArray(4)
-    var getRegister =
+    private var registers = UShortArray(4)
+    private val getRegister =
             mapOf(
-                    REGS.AF to registers[0].toUInt(),
-                    REGS.BC to registers[1].toUInt(),
-                    REGS.DE to registers[2].toUInt(),
-                    REGS.HL to registers[3].toUInt(),
-                    REGS.A to registers[0].and(0xf0u).toUInt(),
-                    REGS.F to registers[0].and(0x0fu).toUInt(),
-                    REGS.B to registers[1].and(0xf0u).toUInt(),
-                    REGS.C to registers[1].and(0x0fu).toUInt(),
-                    REGS.D to registers[2].and(0xf0u).toUInt(),
-                    REGS.E to registers[2].and(0x0fu).toUInt(),
-                    REGS.H to registers[3].and(0xf0u).toUInt(),
-                    REGS.L to registers[3].and(0x0fu).toUInt(),
+                    REGS.AF to registers[0].toInt(),
+                    REGS.BC to registers[1].toInt(),
+                    REGS.DE to registers[2].toInt(),
+                    REGS.HL to registers[3].toInt(),
+                    REGS.A to registers[0].and(0xf0u).toInt().shr(8),
+                    REGS.F to registers[0].and(0x0fu).toInt(),
+                    REGS.B to registers[1].and(0xf0u).toInt().shr(8),
+                    REGS.C to registers[1].and(0x0fu).toInt(),
+                    REGS.D to registers[2].and(0xf0u).toInt().shr(8),
+                    REGS.E to registers[2].and(0x0fu).toInt(),
+                    REGS.H to registers[3].and(0xf0u).toInt().shr(8),
+                    REGS.L to registers[3].and(0x0fu).toInt(),
             )
 
-    public fun getRegister(reg: REGS): UShort {
-        return 0u
+    public fun getRegisterValue(reg: REGS): Int{
+        return getRegister.?get(reg)
     }
 }
